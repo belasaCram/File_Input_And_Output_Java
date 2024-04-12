@@ -25,9 +25,9 @@ public class FileCheckAccessRead {
         
         try{
             
-//            filePath.getFileSystem().provider().checkAccess(filePath, WRITE, EXECUTE);
-              filePath.getFileSystem().provider().checkAccess(filePath);
-              
+            filePath.getFileSystem().provider().checkAccess(filePath, READ, EXECUTE);
+//              filePath.getFileSystem().provider().checkAccess(filePath);
+              System.out.println("File can be read");
         }catch(IOException e){
             System.out.println("The file cannot be used");
         }

@@ -25,7 +25,7 @@ public class BufferedWriterSample
         Scanner input = new Scanner(System.in);
         
         // We create a Path object representing the file where we want to write the student data.
-        Path file = Paths.get("");
+        Path file = Paths.get("C:\\Users\\Marc Nelson Belasa\\Documents\\NetBeansProjects\\FileInputAndOutputTutorial\\file.txt");
         
         // We declare variables to store student information.
         long id;
