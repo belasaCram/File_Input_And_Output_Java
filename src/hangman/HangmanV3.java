@@ -4,25 +4,19 @@
  */
 package hangman;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
-class Hangman 
+class GuessingGame 
 {
-    private String secretWord;
+    private String guessedWord;
     private List<Character> guessedLetters;
     private int attemptsLeft;
 
-    public Hangman(String word) {
-        secretWord = word.toLowerCase();
+    public GuessingGame(String word) {
+        guessedWord = word.toLowerCase();
         guessedLetters = new ArrayList<>();
-        attemptsLeft = 7;
+        attemptsLeft = 10;
     }
     
     
@@ -35,7 +29,7 @@ class Hangman
 
         guessedLetters.add(letter);
 
-        if (secretWord.indexOf(letter) == -1) {
+        if (guessedWord.indexOf(letter) == -1) {
             attemptsLeft--;
         }
     }
@@ -45,7 +39,7 @@ class Hangman
     }
 
     public boolean isWordGuessed() {
-        for (char c : secretWord.toCharArray()) {
+        for (char c : guessedWord.toCharArray()) {
             if (!guessedLetters.contains(c)) {
                 return false;
             }
@@ -54,7 +48,7 @@ class Hangman
     }
 
     public void displayWordProgress() {
-        for (char c : secretWord.toCharArray()) {
+        for (char c : guessedWord.toCharArray()) {
             if (guessedLetters.contains(c)) {
                 System.out.print(c);
             } else {
@@ -69,37 +63,38 @@ class Hangman
     }
 
     public String getSecretWord() {
-        return secretWord;
+        return guessedWord;
     }
 }
 
-public class LaraCakes {
+
+public class HangmanV3 {
     
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+      public static void main(String[] args) {
+        Scanner ebok = new Scanner(System.in);
         String fileName = "words.txt";
         List<String> words = readWordsFromFile(fileName);
 
         if (words.isEmpty()) {
-            System.out.println("No words found in the file.");
+            System.out.println("There are no words found in the file!");
             return;
         }
 
         Random random = new Random();
         String word = words.get(random.nextInt(words.size()));
         
-        Hangman hangman = new Hangman(word);
+        GuessingGame hangman = new GuessingGame(word);
 
-        System.out.println("Welcome to Hangman!");
-        System.out.println("Guess the letters to uncover the secret word.");
-        System.out.println("You have 7 attempts.");
+        System.out.println("Welcome to Guessing Game1");
+        System.out.println("Try to guess the word by using letters only. ");
+        System.out.println("You only have 10 attempts.");
 
         while (!hangman.isGameOver()) {
             System.out.println("\nAttempts left: " + hangman.getAttemptsLeft());
             hangman.displayWordProgress();
 
             System.out.print("Enter a letter: ");
-            char letter = scanner.nextLine().charAt(0);
+            char letter = ebok.nextLine().charAt(0);
             hangman.guessLetter(letter);
 
             if (hangman.isWordGuessed()) {
@@ -114,16 +109,16 @@ public class LaraCakes {
         List<String> words = new ArrayList<>();
         try {
             File file = new File(fileName);
-            Scanner scanner = new Scanner(file);
-            while (scanner.hasNextLine()) {
-                String word = scanner.nextLine().trim();
+            Scanner ebok = new Scanner(file);
+            while (ebok.hasNextLine()) {
+                String word = ebok.nextLine().trim();
                 if (!word.isEmpty()) {
                     words.add(word);
                 }
             }
-            scanner.close();
+            ebok.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + fileName);
+            System.out.println("The file cannot be found");
         }
         return words;
     }
@@ -139,4 +134,5 @@ public class LaraCakes {
             System.out.println("Error writing to file: " + fileName);
         }
     }
+    
 }

@@ -16,7 +16,7 @@ import java.util.Scanner;
  *
  * @author Marc Nelson Belasa
  */
-public class Miko {
+public class LoginAndRegisterV3 {
 
     public static void main(String[] args)
     {

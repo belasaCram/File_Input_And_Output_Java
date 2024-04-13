@@ -23,17 +23,10 @@ public class LoginAndRegisterPT
         System.out.println("(1)Login\n(2)Register");
         int choice = scan.nextInt();
         
-        if(choice == 1)
-        {
-            Login();
-        }
-        else if(choice == 2)
-        {
-            Register();
-        }
-        else
-        {
-            System.out.println("Invalid Input");
+        switch (choice) {
+            case 1 -> Login();
+            case 2 -> Register();
+            default -> System.out.println("Invalid Input");
         }
     }
     
